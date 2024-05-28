@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import NavbarLinks from './NavbarLinks';
 import MobileMenu from './MobileMenu';
 import UserNav from './UserNav';
+import ThemeSwitch from './ThemeSwitch';
 
 const Navbar = async () => {
   const { getUser } = getKindeServerSession();
@@ -28,6 +29,8 @@ const Navbar = async () => {
       <NavbarLinks />
 
       <div className="ms-auto flex items-center gap-x-2 md:col-span-3">
+        <ThemeSwitch />
+
         {user ? (
           <UserNav
             email={user.email as string}
