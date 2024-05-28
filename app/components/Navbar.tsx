@@ -9,6 +9,7 @@ import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 import { Button } from '@/components/ui/button';
 import NavbarLinks from './NavbarLinks';
 import MobileMenu from './MobileMenu';
+import UserNav from './UserNav';
 
 const Navbar = async () => {
   const { getUser } = getKindeServerSession();
@@ -28,7 +29,13 @@ const Navbar = async () => {
 
       <div className="ms-auto flex items-center gap-x-2 md:col-span-3">
         {user ? (
-          <h1>Hi {user.given_name}</h1>
+          <UserNav
+            email={user.email as string}
+            name={user.given_name as string}
+            profileImage={
+              user.picture ?? `https://avatar.vercel.sh/${user.given_name}`
+            }
+          />
         ) : (
           <div className="flex items-center gap-x-2">
             <Button size="icon" asChild>
