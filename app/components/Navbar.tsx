@@ -1,5 +1,9 @@
 import Link from 'next/link';
 import { LogIn } from 'lucide-react';
+import {
+  LoginLink,
+  RegisterLink,
+} from '@kinde-oss/kinde-auth-nextjs/components';
 
 import { Button } from '@/components/ui/button';
 import NavbarLinks from './NavbarLinks';
@@ -19,10 +23,14 @@ const Navbar = () => {
       <NavbarLinks />
 
       <div className="ms-auto flex items-center gap-x-2 md:col-span-3">
-        <Button size="icon">
-          <LogIn className="h-4 w-4" />
+        <Button size="icon" asChild>
+          <LoginLink>
+            <LogIn className="h-4 w-4" />
+          </LoginLink>
         </Button>
-        <Button variant="secondary">Register</Button>
+        <Button variant="secondary">
+          <RegisterLink>Register</RegisterLink>
+        </Button>
 
         <div className="md:hidden">
           <MobileMenu />
