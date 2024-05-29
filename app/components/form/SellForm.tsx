@@ -66,6 +66,11 @@ const SellForm = () => {
             <Label>Product Images</Label>
             <UploadDropzone endpoint="imageUploader" />
           </div>
+
+          <div className="flex flex-col gap-y-2">
+            <Label>Product File</Label>
+            <UploadDropzone endpoint="productFileUploader" />
+          </div>
         </CardContent>
       </CardHeader>
     </form>
