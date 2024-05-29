@@ -75,7 +75,8 @@ const WYSIWYGEditor = () => {
     content: '<p>Hello World!</p>',
     editorProps: {
       attributes: {
-        class: 'prose prose-sm sm:prose-base min-h-[150px] focus:outline-none',
+        class:
+          'prose dark:prose-invert prose-sm sm:prose-base min-h-[150px] focus:outline-none',
       },
     },
   });
