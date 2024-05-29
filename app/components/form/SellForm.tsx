@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import SelectCategory from '../SelectCategory';
 import WYSIWYGEditor from '../WYSIWYGEditor';
+import { UploadDropzone } from '@/app/lib/uploadthing';
 
 const SellForm = () => {
   return (
@@ -59,6 +60,11 @@ const SellForm = () => {
           <div className="flex flex-col gap-y-2">
             <Label>Description</Label>
             <WYSIWYGEditor />
+          </div>
+
+          <div className="flex flex-col gap-y-2">
+            <Label>Product Images</Label>
+            <UploadDropzone endpoint="imageUploader" />
           </div>
         </CardContent>
       </CardHeader>
