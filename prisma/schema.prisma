@@ -12,5 +12,6 @@ model User {
   id           String @id @unique
   email        String
   firstName    String
+  lastName     String
   profileImage String
 }
