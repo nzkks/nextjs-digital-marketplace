@@ -1,12 +1,14 @@
 import {
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { Button } from '@/components/ui/button';
 import { UploadDropzone } from '@/app/lib/uploadthing';
 import SelectCategory from '../SelectCategory';
 import WYSIWYGEditor from '../WYSIWYGEditor';
@@ -73,6 +75,9 @@ const SellForm = () => {
           <UploadDropzone endpoint="productFileUploader" />
         </div>
       </CardContent>
+      <CardFooter className="mt-5">
+        <Button>Submit form</Button>
+      </CardFooter>
     </form>
   );
 };
