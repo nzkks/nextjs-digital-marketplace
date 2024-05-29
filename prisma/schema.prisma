@@ -14,4 +14,27 @@ model User {
   firstName    String
   lastName     String
   profileImage String
+
+  Product Product[]
+}
+
+model Product {
+  id               String        @id @unique
+  name             String
+  price            Int
+  smallDescription String
+  description      String
+  images           String[]
+  productFile      String
+  category         CategoryTypes
+
+  createdAt DateTime @default(now())
+  User      User?    @relation(fields: [userId], references: [id])
+  userId    String?
+}
+
+enum CategoryTypes {
+  template
+  uikit
+  icon
 }
