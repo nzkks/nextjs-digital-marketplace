@@ -22,6 +22,7 @@ import WYSIWYGEditor from '../WYSIWYGEditor';
 const SellForm = () => {
   const [json, setJson] = useState<null | JSONContent>(null);
   const [images, setImages] = useState<null | string[]>(null);
+  const [productFile, seProductFile] = useState<null | string>(null);
 
   return (
     <form>
@@ -95,8 +96,18 @@ const SellForm = () => {
         </div>
 
         <div className="flex flex-col gap-y-2">
+          <input type="hidden" name="productFile" value={productFile ?? ''} />
           <Label>Product File</Label>
-          <UploadDropzone endpoint="productFileUploader" />
+          <UploadDropzone
+            endpoint="productFileUploader"
+            onClientUploadComplete={(res) => {
+              seProductFile(res[0].url);
+              toast.success('File uploaded successfully');
+            }}
+            onUploadError={(error: Error) => {
+              toast.error('Something went wrong, try again');
+            }}
+          />
         </div>
       </CardContent>
       <CardFooter className="mt-5">
