@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { type JSONContent } from '@tiptap/react';
+import { toast } from 'sonner';
 
 import {
   CardContent,
@@ -20,6 +21,7 @@ import WYSIWYGEditor from '../WYSIWYGEditor';
 
 const SellForm = () => {
   const [json, setJson] = useState<null | JSONContent>(null);
+  const [images, setImages] = useState<null | string[]>(null);
 
   return (
     <form>
@@ -78,8 +80,18 @@ const SellForm = () => {
         </div>
 
         <div className="flex flex-col gap-y-2">
+          <input type="hidden" name="images" value={JSON.stringify(images)} />
           <Label>Product Images</Label>
-          <UploadDropzone endpoint="imageUploader" />
+          <UploadDropzone
+            endpoint="imageUploader"
+            onClientUploadComplete={(res) => {
+              setImages(res.map((item) => item.url));
+              toast.success('Images uploaded successfully');
+            }}
+            onUploadError={(error: Error) => {
+              toast.error('Something went wrong, try again');
+            }}
+          />
         </div>
 
         <div className="flex flex-col gap-y-2">
