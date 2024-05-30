@@ -1,9 +1,11 @@
 'use client';
 
 import { useState } from 'react';
+import { useFormState } from 'react-dom';
 import { type JSONContent } from '@tiptap/react';
 import { toast } from 'sonner';
 
+import { SellProduct, type State } from '@/app/actions';
 import {
   CardContent,
   CardDescription,
@@ -20,12 +22,16 @@ import SelectCategory from '../SelectCategory';
 import WYSIWYGEditor from '../WYSIWYGEditor';
 
 const SellForm = () => {
+  const initialState: State = { status: undefined, message: '' };
+  const [state, formAction] = useFormState(SellProduct, initialState);
   const [json, setJson] = useState<null | JSONContent>(null);
   const [images, setImages] = useState<null | string[]>(null);
   const [productFile, seProductFile] = useState<null | string>(null);
 
+  console.log(state?.message);
+
   return (
-    <form>
+    <form action={formAction}>
       <CardHeader>
         <CardTitle>Sell your product with ease</CardTitle>
         <CardDescription>
@@ -111,7 +117,7 @@ const SellForm = () => {
         </div>
       </CardContent>
       <CardFooter className="mt-5">
-        <Button>Submit form</Button>
+        <Button type="submit">Submit form</Button>
       </CardFooter>
     </form>
   );
