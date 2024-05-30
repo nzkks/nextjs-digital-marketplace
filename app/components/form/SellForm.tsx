@@ -1,3 +1,8 @@
+'use client';
+
+import { useState } from 'react';
+import { type JSONContent } from '@tiptap/react';
+
 import {
   CardContent,
   CardDescription,
@@ -14,6 +19,8 @@ import SelectCategory from '../SelectCategory';
 import WYSIWYGEditor from '../WYSIWYGEditor';
 
 const SellForm = () => {
+  const [json, setJson] = useState<null | JSONContent>(null);
+
   return (
     <form>
       <CardHeader>
@@ -61,8 +68,13 @@ const SellForm = () => {
         </div>
 
         <div className="flex flex-col gap-y-2">
+          <input
+            type="hidden"
+            name="description"
+            value={JSON.stringify(json)}
+          />
           <Label>Description</Label>
-          <WYSIWYGEditor />
+          <WYSIWYGEditor json={json} setJson={setJson} />
         </div>
 
         <div className="flex flex-col gap-y-2">

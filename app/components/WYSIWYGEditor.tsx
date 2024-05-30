@@ -1,6 +1,11 @@
 'use client';
 
-import { EditorContent, useEditor, type Editor } from '@tiptap/react';
+import {
+  EditorContent,
+  JSONContent,
+  useEditor,
+  type Editor,
+} from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 
 import { Button } from '@/components/ui/button';
@@ -69,16 +74,23 @@ export const MenuBar = ({ editor }: { editor: Editor | null }) => {
   );
 };
 
-const WYSIWYGEditor = () => {
+const WYSIWYGEditor = ({
+  json,
+  setJson,
+}: {
+  json: JSONContent | null;
+  setJson: any;
+}) => {
   const editor = useEditor({
     extensions: [StarterKit],
-    content: '<p>Hello World!</p>',
+    content: json,
     editorProps: {
       attributes: {
         class:
           'prose dark:prose-invert prose-sm sm:prose-base min-h-[150px] focus:outline-none',
       },
     },
+    onUpdate: ({ editor }) => setJson(editor.getJSON()),
   });
 
   return (
