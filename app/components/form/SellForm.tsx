@@ -26,9 +26,7 @@ const SellForm = () => {
   const [state, formAction] = useFormState(SellProduct, initialState);
   const [json, setJson] = useState<null | JSONContent>(null);
   const [images, setImages] = useState<null | string[]>(null);
-  const [productFile, seProductFile] = useState<null | string>(null);
-
-  console.log(state?.message);
+  const [productFile, setProductFile] = useState<null | string>(null);
 
   return (
     <form action={formAction}>
@@ -48,11 +46,19 @@ const SellForm = () => {
             required
             minLength={3}
           />
+          {state?.errors?.['name']?.[0] && (
+            <p className="text-destructive">{state?.errors?.['name']?.[0]}</p>
+          )}
         </div>
 
         <div className="flex flex-col gap-y-2">
           <Label>Category</Label>
           <SelectCategory />
+          {state?.errors?.['category']?.[0] && (
+            <p className="text-destructive">
+              {state?.errors?.['category']?.[0]}
+            </p>
+          )}
         </div>
 
         <div className="flex flex-col gap-y-2">
@@ -64,6 +70,9 @@ const SellForm = () => {
             required
             min={1}
           />
+          {state?.errors?.['price']?.[0] && (
+            <p className="text-destructive">{state?.errors?.['price']?.[0]}</p>
+          )}
         </div>
 
         <div className="flex flex-col gap-y-2">
@@ -74,6 +83,11 @@ const SellForm = () => {
             required
             minLength={10}
           />
+          {state?.errors?.['smallDescription']?.[0] && (
+            <p className="text-destructive">
+              {state?.errors?.['smallDescription']?.[0]}
+            </p>
+          )}
         </div>
 
         <div className="flex flex-col gap-y-2">
@@ -84,6 +98,11 @@ const SellForm = () => {
           />
           <Label>Description</Label>
           <WYSIWYGEditor json={json} setJson={setJson} />
+          {state?.errors?.['description']?.[0] && (
+            <p className="text-destructive">
+              {state?.errors?.['description']?.[0]}
+            </p>
+          )}
         </div>
 
         <div className="flex flex-col gap-y-2">
@@ -99,6 +118,9 @@ const SellForm = () => {
               toast.error('Something went wrong, try again');
             }}
           />
+          {state?.errors?.['images']?.[0] && (
+            <p className="text-destructive">{state?.errors?.['images']?.[0]}</p>
+          )}
         </div>
 
         <div className="flex flex-col gap-y-2">
@@ -107,13 +129,18 @@ const SellForm = () => {
           <UploadDropzone
             endpoint="productFileUploader"
             onClientUploadComplete={(res) => {
-              seProductFile(res[0].url);
+              setProductFile(res[0].url);
               toast.success('File uploaded successfully');
             }}
             onUploadError={(error: Error) => {
               toast.error('Something went wrong, try again');
             }}
           />
+          {state?.errors?.['productFile']?.[0] && (
+            <p className="text-destructive">
+              {state?.errors?.['productFile']?.[0]}
+            </p>
+          )}
         </div>
       </CardContent>
       <CardFooter className="mt-5">

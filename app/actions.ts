@@ -39,8 +39,13 @@ export async function SellProduct(prevState: any, formData: FormData) {
     throw new Error('Something went wromg...');
   }
   const validateFields = await productSchema.safeParse({
-    ...Object.fromEntries(formData.entries()),
+    name: formData.get('name'),
+    category: formData.get('category'),
+    price: Number(formData.get('price')),
+    smallDescription: formData.get('smallDescription'),
+    description: formData.get('description'),
     images: JSON.parse(formData.get('images') as string),
+    productFile: formData.get('productFile'),
   });
 
   if (!validateFields.success) {
