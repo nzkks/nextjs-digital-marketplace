@@ -154,7 +154,7 @@ const SellForm = () => {
         </div>
       </CardContent>
       <CardFooter className="mt-5">
-        <SubmitButton />
+        <SubmitButton title="Create Product" />
       </CardFooter>
     </form>
   );
