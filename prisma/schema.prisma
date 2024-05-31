@@ -19,11 +19,11 @@ model User {
 }
 
 model Product {
-  id               String        @id @unique
+  id               String        @id @default(uuid())
   name             String
   price            Int
   smallDescription String
-  description      String
+  description      Json
   images           String[]
   productFile      String
   category         CategoryTypes
