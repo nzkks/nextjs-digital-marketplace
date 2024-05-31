@@ -57,4 +57,11 @@ export async function SellProduct(prevState: any, formData: FormData) {
 
     return state;
   }
+
+  const state: State = {
+    status: 'success',
+    message: 'Product has been created!',
+  };
+
+  return state;
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useFormState } from 'react-dom';
 import { type JSONContent } from '@tiptap/react';
 import { toast } from 'sonner';
@@ -27,6 +27,14 @@ const SellForm = () => {
   const [json, setJson] = useState<null | JSONContent>(null);
   const [images, setImages] = useState<null | string[]>(null);
   const [productFile, setProductFile] = useState<null | string>(null);
+
+  useEffect(() => {
+    if (state.status === 'success') {
+      toast.success(state.message);
+    } else if (state.status === 'error') {
+      toast.error(state.message);
+    }
+  }, [state]);
 
   return (
     <form action={formAction}>
@@ -112,7 +120,7 @@ const SellForm = () => {
             endpoint="imageUploader"
             onClientUploadComplete={(res) => {
               setImages(res.map((item) => item.url));
-              toast.success('Images uploaded successfully');
+              toast.success('Image(s) has been uploaded successfully');
             }}
             onUploadError={(error: Error) => {
               toast.error('Something went wrong, try again');
@@ -130,7 +138,7 @@ const SellForm = () => {
             endpoint="productFileUploader"
             onClientUploadComplete={(res) => {
               setProductFile(res[0].url);
-              toast.success('File uploaded successfully');
+              toast.success('Zip file has been uploaded successfully');
             }}
             onUploadError={(error: Error) => {
               toast.error('Something went wrong, try again');
