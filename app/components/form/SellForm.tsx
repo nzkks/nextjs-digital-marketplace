@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useFormState } from 'react-dom';
 import { type JSONContent } from '@tiptap/react';
 import { toast } from 'sonner';
+import { redirect } from 'next/navigation';
 
 import { SellProduct, type State } from '@/app/actions';
 import {
@@ -31,6 +32,7 @@ const SellForm = () => {
   useEffect(() => {
     if (state.status === 'success') {
       toast.success(state.message);
+      redirect('/');
     } else if (state.status === 'error') {
       toast.error(state.message);
     }
