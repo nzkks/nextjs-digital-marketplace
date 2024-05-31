@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { NextSSRPlugin } from '@uploadthing/react/next-ssr-plugin';
+import { Toaster } from 'sonner';
 
 import './globals.css';
 import Navbar from './components/Navbar';
@@ -40,6 +41,7 @@ export default function RootLayout({
           />
           <Navbar />
           {children}
+          <Toaster richColors theme="system" closeButton />
         </ThemeProvider>
       </body>
     </html>
