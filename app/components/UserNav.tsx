@@ -46,7 +46,9 @@ const UserNav = ({ email, name, profileImage }: Props) => {
           <DropdownMenuItem asChild>
             <Link href="/sell">Sell your product</Link>
           </DropdownMenuItem>
-          <DropdownMenuItem>Profile</DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <Link href="/settings">Settings</Link>
+          </DropdownMenuItem>
           <DropdownMenuItem>Profile</DropdownMenuItem>
           <DropdownMenuItem>Profile</DropdownMenuItem>
         </DropdownMenuGroup>
