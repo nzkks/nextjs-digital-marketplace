@@ -1,5 +1,9 @@
 'use client';
 
+import { useEffect } from 'react';
+import { useFormState } from 'react-dom';
+import { toast } from 'sonner';
+
 import {
   CardContent,
   CardDescription,
@@ -9,6 +13,7 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { State, UpdateUserSettings } from '@/app/actions';
 import { SubmitButton } from '../SubmitButtons';
 
 type Props = {
@@ -18,8 +23,19 @@ type Props = {
 };
 
 const SettingsForm = ({ firstName, lastName, email }: Props) => {
+  const initialState: State = { status: undefined, message: '' };
+  const [state, formAction] = useFormState(UpdateUserSettings, initialState);
+
+  useEffect(() => {
+    if (state.status === 'success') {
+      toast.success(state.message);
+    } else if (state.status === 'error') {
+      toast.error(state.message);
+    }
+  }, [state]);
+
   return (
-    <form>
+    <form action={formAction}>
       <CardHeader>
         <CardTitle>Settings</CardTitle>
         <CardDescription>
