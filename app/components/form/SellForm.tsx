@@ -16,10 +16,10 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { Button } from '@/components/ui/button';
 import { UploadDropzone } from '@/app/lib/uploadthing';
 import SelectCategory from '../SelectCategory';
 import WYSIWYGEditor from '../WYSIWYGEditor';
+import { SubmitButton } from '../SubmitButtons';
 
 const SellForm = () => {
   const initialState: State = { status: undefined, message: '' };
@@ -144,7 +144,7 @@ const SellForm = () => {
         </div>
       </CardContent>
       <CardFooter className="mt-5">
-        <Button type="submit">Submit form</Button>
+        <SubmitButton />
       </CardFooter>
     </form>
   );
