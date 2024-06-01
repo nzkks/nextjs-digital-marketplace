@@ -1,3 +1,5 @@
+import NewestProducts from './components/NewestProducts';
+
 export default function Home() {
   return (
     <section className="mx-auto mb-24 max-w-7xl px-4 md:px-8">
@@ -10,6 +12,8 @@ export default function Home() {
           platform for both sellers and buyers alike.
         </p>
       </div>
+
+      <NewestProducts />
     </section>
   );
 }
