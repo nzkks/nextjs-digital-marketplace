@@ -1,3 +1,10 @@
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel';
 import Image from 'next/image';
 
 type Props = {
@@ -11,14 +18,24 @@ type Props = {
 const ProductCard = ({ id, name, price, images, smallDescription }: Props) => {
   return (
     <div className="rounded-lg">
-      <div className="relative h-[230px]">
-        <Image
-          alt={name}
-          src={images[0]}
-          fill
-          className="h-full w-full rounded-lg object-cover"
-        />
-      </div>
+      <Carousel className="mx-auto w-full">
+        <CarouselContent>
+          {images.map((item, index) => (
+            <CarouselItem key={index}>
+              <div className="relative h-[230px]">
+                <Image
+                  alt="Product image"
+                  src={item}
+                  fill
+                  className="h-full w-full rounded-lg object-cover"
+                />
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious className="ml-16" />
+        <CarouselNext className="mr-16" />
+      </Carousel>
 
       <div className="mt-2 flex items-center justify-between">
         <h1 className="text-xl font-semibold">{name}</h1>
