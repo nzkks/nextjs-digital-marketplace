@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button';
 import {
   Carousel,
   CarouselContent,
@@ -6,6 +7,7 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel';
 import Image from 'next/image';
+import Link from 'next/link';
 
 type Props = {
   id: string;
@@ -47,6 +49,10 @@ const ProductCard = ({ id, name, price, images, smallDescription }: Props) => {
       <p className="mt-2 line-clamp-2 text-sm text-gray-600">
         {smallDescription}
       </p>
+
+      <Button asChild className="mt-5 w-full">
+        <Link href={`/product/${id}`}>Learn More!</Link>
+      </Button>
     </div>
   );
 };
