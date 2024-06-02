@@ -1,7 +1,9 @@
+import { Suspense } from 'react';
 import Link from 'next/link';
-import ProductCard from './ProductCard';
-import prisma from '../lib/db';
 import { notFound } from 'next/navigation';
+import { Skeleton } from '@/components/ui/skeleton';
+import prisma from '../lib/db';
+import ProductCard, { ProductCardLoading } from './ProductCard';
 
 type Props = {
   category: 'newest' | 'templates' | 'uikits' | 'icons';
@@ -99,11 +101,21 @@ const getData = async ({ category }: Props) => {
   }
 };
 
-const ProductRow = async ({ category }: Props) => {
+const ProductRow = ({ category }: Props) => {
+  return (
+    <section className="mt-12">
+      <Suspense fallback={<LoadingState />}>
+        <LoadRows category={category} />
+      </Suspense>
+    </section>
+  );
+};
+
+const LoadRows = async ({ category }: Props) => {
   const data = await getData({ category });
 
   return (
-    <section className="mt-12">
+    <>
       <div className="md:flex md:items-center md:justify-between">
         <h2 className="text-2xl font-extrabold tracking-tighter ">
           {data.title}
@@ -115,13 +127,25 @@ const ProductRow = async ({ category }: Props) => {
           All {data.title} <span>&rarr;</span>
         </Link>
       </div>
-
       <div className="gird-cols-1 mt-4 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
         {data.data.map((product) => (
           <ProductCard key={product.id} {...product} />
         ))}
       </div>
-    </section>
+    </>
+  );
+};
+
+const LoadingState = () => {
+  return (
+    <div>
+      <Skeleton className="h-8 w-56" />
+      <div className="mt-4 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
+        <ProductCardLoading />
+        <ProductCardLoading />
+        <ProductCardLoading />
+      </div>
+    </div>
   );
 };
 
