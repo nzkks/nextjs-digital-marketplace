@@ -1,6 +1,6 @@
 import ProductRow from './components/ProductRow';
 
-export default function Home() {
+const Home = () => {
   return (
     <section className="mx-auto mb-24 max-w-7xl px-4 md:px-8">
       <div className="mx-auto max-w-3xl text-center text-2xl font-semibold sm:text-5xl lg:text-6xl">
@@ -14,6 +14,11 @@ export default function Home() {
       </div>
 
       <ProductRow category="newest" />
+      <ProductRow category="templates" />
+      <ProductRow category="icons" />
+      <ProductRow category="uikits" />
     </section>
   );
-}
+};
+
+export default Home;
