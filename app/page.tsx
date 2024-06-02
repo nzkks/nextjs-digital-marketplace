@@ -1,4 +1,3 @@
-import NewestProducts from './components/NewestProducts';
 import ProductRow from './components/ProductRow';
 
 export default function Home() {
