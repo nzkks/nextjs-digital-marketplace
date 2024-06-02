@@ -6,6 +6,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
+import { Skeleton } from '@/components/ui/skeleton';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -56,5 +57,21 @@ const ProductCard = ({ id, name, price, images, smallDescription }: Props) => {
     </div>
   );
 };
+
+const ProductCardLoading = () => {
+  return (
+    <div className="flex flex-col">
+      <Skeleton className="h-[230px] w-full" />
+      <div className="mt-2 flex flex-col gap-y-2">
+        <Skeleton className="h-4 w-full" />
+        <Skeleton className="h-6 w-full" />
+      </div>
+
+      <Skeleton className="mt-5 h-10 w-full" />
+    </div>
+  );
+};
+
+export { ProductCardLoading };
 
 export default ProductCard;
