@@ -124,7 +124,8 @@ const LoadRows = async ({ category }: Props) => {
           href={data.link}
           className="hidden text-sm font-medium text-primary hover:text-primary/90 md:block"
         >
-          All {data.title} <span>&rarr;</span>
+          All {data.title === 'Newest Products' ? 'Products' : data.title}{' '}
+          <span>&rarr;</span>
         </Link>
       </div>
       <div className="gird-cols-1 mt-4 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
