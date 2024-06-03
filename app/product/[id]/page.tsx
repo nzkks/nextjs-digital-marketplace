@@ -10,6 +10,7 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel';
 import ProductDescription from '@/app/components/ProductDescription';
+import { BuyProduct } from '@/app/actions';
 
 const getdata = async (id: string) => {
   const data = await prisma.product.findUnique({
@@ -45,7 +46,7 @@ const ProductPage = async ({ params }: { params: { id: string } }) => {
         <CarouselContent>
           {data?.images.map((item, index) => (
             <CarouselItem key={index}>
-              <div className="aspect-w-4 aspect-h-3 overflow-hidden rounded-lg bg-gray-100">
+              <div className="aspect-h-3 aspect-w-4 overflow-hidden rounded-lg bg-gray-100">
                 <Image
                   src={item as string}
                   alt="Product image"
@@ -67,9 +68,12 @@ const ProductPage = async ({ params }: { params: { id: string } }) => {
 
         <p className="mt-2 text-muted-foreground">{data?.smallDescription}</p>
 
-        <Button size="lg" className="mt-10 w-full">
-          Buy for ${data?.price}
-        </Button>
+        <form action={BuyProduct}>
+          <input type="hidden" name="id" value={data?.id} />
+          <Button type="submit" size="lg" className="mt-10 w-full">
+            Buy for ${data?.price}
+          </Button>
+        </form>
 
         <div className="mt-10 border-t border-gray-200 pt-10">
           <div className="grid w-full grid-cols-2 gap-y-3">
