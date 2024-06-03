@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/carousel';
 import ProductDescription from '@/app/components/ProductDescription';
 import { BuyProduct } from '@/app/actions';
+import { BuyButton } from '@/app/components/SubmitButtons';
 
 const getdata = async (id: string) => {
   const data = await prisma.product.findUnique({
@@ -70,9 +71,7 @@ const ProductPage = async ({ params }: { params: { id: string } }) => {
 
         <form action={BuyProduct}>
           <input type="hidden" name="id" value={data?.id} />
-          <Button type="submit" size="lg" className="mt-10 w-full">
-            Buy for ${data?.price}
-          </Button>
+          <BuyButton price={data?.price as number} />
         </form>
 
         <div className="mt-10 border-t border-gray-200 pt-10">
