@@ -164,9 +164,9 @@ export async function BuyProduct(formData: FormData) {
         quantity: 1,
       },
     ],
-    metadata: {
-      link: data?.productFile as string,
-    },
+    // metadata: {
+    //   link: data?.productFile as string,
+    // },
     success_url: 'http://localhost:3000/payment/success',
     cancel_url: 'http://localhost:3000/payment/cancel',
   });
