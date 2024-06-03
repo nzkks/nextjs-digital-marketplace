@@ -1,7 +1,8 @@
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
+import { NextResponse } from 'next/server';
 
 import prisma from '@/app/lib/db';
-import { NextResponse } from 'next/server';
+import { stripe } from '@/app/lib/stripe';
 
 export async function GET() {
   const { getUser } = getKindeServerSession();
@@ -18,6 +19,21 @@ export async function GET() {
   });
 
   if (!dbUser) {
+    const account = await stripe.accounts.create({
+      email: user.email as string,
+      controller: {
+        losses: {
+          payments: 'application',
+        },
+        fees: {
+          payer: 'application',
+        },
+        stripe_dashboard: {
+          type: 'express',
+        },
+      },
+    });
+
     dbUser = await prisma.user.create({
       data: {
         id: user.id,
@@ -26,6 +42,7 @@ export async function GET() {
         lastName: user.family_name ?? '',
         profileImage:
           user.picture ?? `https://avatar.vercel.sh/${user.given_name}`,
+        connectedAccountId: account.id,
       },
     });
   }
