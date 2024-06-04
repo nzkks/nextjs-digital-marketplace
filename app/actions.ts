@@ -75,12 +75,7 @@ export async function SellProduct(prevState: any, formData: FormData) {
     },
   });
 
-  const state: State = {
-    status: 'success',
-    message: 'Product has been created!',
-  };
-
-  return state;
+  return redirect(`/product/${data.id}`);
 }
 
 const userSettingsSchema = z.object({
