@@ -164,9 +164,9 @@ export async function BuyProduct(formData: FormData) {
         quantity: 1,
       },
     ],
-    // metadata: {
-    //   link: data?.productFile as string,
-    // },
+    metadata: {
+      link: data?.productFile as string,
+    },
     payment_intent_data: {
       application_fee_amount: Math.round((data?.price as number) * 100) * 0.1, // 10% commission
       transfer_data: {
