@@ -140,6 +140,11 @@ export async function BuyProduct(formData: FormData) {
       images: true,
       smallDescription: true,
       productFile: true,
+      User: {
+        select: {
+          connectedAccountId: true,
+        },
+      },
     },
   });
 
@@ -162,6 +167,12 @@ export async function BuyProduct(formData: FormData) {
     // metadata: {
     //   link: data?.productFile as string,
     // },
+    payment_intent_data: {
+      application_fee_amount: Math.round((data?.price as number) * 100) * 0.1, // 10% commission
+      transfer_data: {
+        destination: data?.User?.connectedAccountId as string,
+      },
+    },
     success_url: 'http://localhost:3000/payment/success',
     cancel_url: 'http://localhost:3000/payment/cancel',
   });
