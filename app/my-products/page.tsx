@@ -1,4 +1,5 @@
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
+import { unstable_noStore as noStore } from 'next/cache';
 
 import prisma from '../lib/db';
 import ProductCard from '../components/ProductCard';
@@ -21,6 +22,7 @@ const getData = async (userId: string) => {
 };
 
 const MyProductsRoute = async () => {
+  noStore();
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 

@@ -1,7 +1,8 @@
 import Image from 'next/image';
-import prisma from '@/app/lib/db';
 import { JSONContent } from '@tiptap/react';
-import { Button } from '@/components/ui/button';
+import { unstable_noStore as noStore } from 'next/cache';
+
+import prisma from '@/app/lib/db';
 import {
   Carousel,
   CarouselContent,
@@ -39,6 +40,7 @@ const getdata = async (id: string) => {
 };
 
 const ProductPage = async ({ params }: { params: { id: string } }) => {
+  noStore();
   const data = await getdata(params.id);
 
   return (

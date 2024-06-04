@@ -1,5 +1,7 @@
 import { notFound } from 'next/navigation';
 import { type CategoryTypes } from '@prisma/client';
+import { unstable_noStore as noStore } from 'next/cache';
+
 import prisma from '@/app/lib/db';
 import ProductCard from '@/app/components/ProductCard';
 
@@ -41,6 +43,7 @@ const getData = async (category: string) => {
 };
 
 const CategoryPage = async ({ params }: { params: { category: string } }) => {
+  noStore();
   const data = await getData(params.category);
 
   return (
